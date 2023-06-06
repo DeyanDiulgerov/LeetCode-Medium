@@ -10,54 +10,61 @@ namespace LongestPalindromicSubstring
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(LongestPalindrome("babad"));
+            /*Console.WriteLine(String.Join(",", FindMedian(new int[] { 1, 3 }, new int[] { 2 })));
+            Console.WriteLine(String.Join(",", FindMedian(new int[] { 1, 2 }, new int[] { 3, 4 })));
+            Console.WriteLine(String.Join(",", FindMedian(new int[] { 1, 3, 5, 6 }, new int[] { 2, 4, 3 })));*/
+
+
             Console.WriteLine(LongestPalindrome("cbbd"));
-            Console.WriteLine(LongestPalindrome("jklolby"));
-            Console.WriteLine(LongestPalindrome("ac"));
-            Console.WriteLine(LongestPalindrome("bb"));
-            Console.WriteLine(LongestPalindrome("jklolbye"));
+            Console.WriteLine(LongestPalindrome("babad"));
+            Console.WriteLine(LongestPalindrome("aabbc"));
+            Console.WriteLine(LongestPalindrome("aabbbc"));
+            Console.WriteLine(LongestPalindrome("ababa"));
         }
+
         public static string LongestPalindrome(string s)
         {
-            if (s == null || s == String.Empty)
+            if (s.Length == 0 || s == String.Empty)
                 return "";
-
-            int maxLength = 1;
-            var maxLengthStr = "";
-
-            for (int i = 0; i < s.Length; i++)
+            else if (s.Length == 1)
+                return s;
+            else if (s.Length == 2 && s[0] == s[1])
+                return s;
+            else if (s.Length == 2 && s[0] != s[1])
+                return s[0].ToString();
+            else
             {
-                //Odd Palindrome
-                //aba, jklolbye, babad
-                int L = i; int R = i;
-                while (L >= 0 && R < s.Length && s[L] == s[R])
+                string result = "";
+
+                for (int i = 0; i < s.Length; i++)
                 {
-                    if (R - L + 1 >= maxLength)
+                    for (int j = i; j < s.Length; j++)
                     {
-                        maxLength = R - L + 1;
-                        maxLengthStr = s.Substring(L, maxLength);
+                        if (j - i + 1 > result.Length && Palindrome(s, i, j))
+                        {
+                            result = s.Substring(i, j - i + 1);
+                        }
                     }
-                    L--;
-                    R++;
                 }
 
-                //Even Palindrom
-                //jklolby, cbdd, bb, ac
+                return result;
+            }
+        }
 
-                L = i; R = i + 1;
-                while (L >= 0 && R < s.Length && s[L] == s[R])
+        public static bool Palindrome(string s, int start, int end)
+        {
+            while (start <= end)
+            {
+                if (s[start] != s[end])
                 {
-                    if (R - L + 1 >= maxLength)
-                    {
-                        maxLength = R - L + 1;
-                        maxLengthStr = s.Substring(L, maxLength);
-                    }
-                    L--;
-                    R++;
+                    return false;
                 }
+
+                start++;
+                end--;
             }
 
-            return maxLengthStr;
+            return true;
         }
     }
 }
