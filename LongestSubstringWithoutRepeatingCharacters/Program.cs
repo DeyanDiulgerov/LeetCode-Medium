@@ -19,28 +19,25 @@ namespace LongestSubstringWithoutRepeatingCharacters
         }
         public static int LengthOfLongestSubstring(string s)
         {
-            //find the length of the longest substring without repeating characters.
-            //abcabcbb, bbbbb, pwwkew
-            int maxLength = 0;
+            int max = 0;
             var list = new List<char>();
 
-            foreach (char c in s)
+            for (int i = 0; i < s.Length; i++)
             {
-                if (!list.Contains(c))
-                    list.Add(c);
-
+                if (!list.Contains(s[i]))
+                    list.Add(s[i]);
                 else
                 {
-                    maxLength = Math.Max(maxLength, list.Count());
+                    max = Math.Max(max, list.Count);
 
-                    // remove preceding characters up to the duplicate text
-                    int index = list.IndexOf(c);
+                    var index = list.IndexOf(s[i]);
                     list.RemoveRange(0, index + 1);
-
-                    list.Add(c);
+                    list.Add(s[i]);
                 }
+
             }
-            return Math.Max(maxLength, list.Count);
+            max = Math.Max(max, list.Count);
+            return max;
         }
 
     }
