@@ -21,40 +21,28 @@ namespace FindFirstandLastPositionofElementinSortedArray
 
         public static int[] SearchRange(int[] nums, int target)
         {
-            if (nums == null || nums.Length == 0)
+            if (nums.Length == 0)
                 return new int[] { -1, -1 };
             else if (nums.Length == 1 && nums.First() != target)
                 return new int[] { -1, -1 };
             else if (nums.Length == 1 && nums.First() == target)
                 return new int[] { 0, 0 };
-            else
+
+            var result = new List<int>();
+            Array.Sort(nums);
+
+            for (int i = 0; i < nums.Count(); i++)
             {
-                var returnList = new List<int>();
-                var numbersList = new List<int>();
-                var index = 0;
-
-                for (int i = 0; i < nums.Length; i++)
-                {
-                    if (nums[i] == target)
-                    {
-                        index = i;
-                        returnList.Add(i);
-                        numbersList.Add(nums[i]);
-                    }
-                }
-
-                if (returnList.Count == 0)
-                    return new int[] { -1, -1 };
-                else if (returnList.Count() == 1)
-                    returnList.Add(index);
-
-                if (numbersList.All(x => x == target) && numbersList.Count > 2)
-                {
-                    return new int[] { index - numbersList.Count() + 1, index };
-                }
-
-                return returnList.ToArray();
+                if (nums[i] == target)
+                    result.Add(i);
+                else
+                    continue;
             }
+
+            if (result.Count() == 0)
+                return new int[] { -1, -1 };
+
+            return new int[] { result.First(), result.Last() };
         }
     }
 }
