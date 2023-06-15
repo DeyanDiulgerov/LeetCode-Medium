@@ -13,6 +13,7 @@ namespace FirstMissingPositiveInteger
             Console.WriteLine(FirstMissingPositive(new int[] { 1, 1000 }));
             Console.WriteLine(FirstMissingPositive(new int[] { -1, -2, -60, 40, 43 }));
             Console.WriteLine(FirstMissingPositive(new int[] { 1, 2, 0 }));
+            Console.WriteLine(String.Join(",", FirstMissingPositive(new int[] { 1, 2, 3, 4, 0 })));
             Console.WriteLine(FirstMissingPositive(new int[] { 1, 1 }));
             Console.WriteLine(FirstMissingPositive(new int[] { 3, 4, -1, 1 }));
             Console.WriteLine(FirstMissingPositive(new int[] { 7, 8, 9, 12, 11 }));
