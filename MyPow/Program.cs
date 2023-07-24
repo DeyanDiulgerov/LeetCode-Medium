@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace MyPow
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(MyPow(2.00000, 10));
+            Console.WriteLine(MyPow(2.10000, 3));
+            Console.WriteLine(MyPow(2.00000, -2));
         }
+
+        public static double MyPow(double x, int n)
+            => Math.Pow(x, n);
     }
 }
