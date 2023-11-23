@@ -22,37 +22,25 @@ namespace ArithmeticSubarrays
         public static IList<bool> ArithmeticSubarrays(int[] nums, int[] l, int[] r)
         {
             int n = nums.Length;
-            int m = l.Length; // and r.Length
-            var resultList = new List<bool>();
+            int m = l.Length;
+            var result = new List<bool>();
 
             for (int i = 0; i < m; i++)
             {
                 var testList = new List<int>();
-                var isArithmeticList = new List<bool>();
-
                 for (int j = l[i]; j <= r[i]; j++)
                     testList.Add(nums[j]);
 
-                testList.Sort(); // 4,5,6,9
+                testList.Sort();
+                bool isArithmetic = true;
 
-                for (int k = 0; k < testList.Count(); k++)
-                {
-                    if (k < testList.Count() - 1)
-                    {
-                        if (testList[k + 1] - testList[k] == testList[1] - testList[0])
-                            isArithmeticList.Add(true);
-                        else
-                            isArithmeticList.Add(false);
-                    }
-                }
+                for (int k = 1; k < testList.Count(); k++)
+                    if (testList[k] - testList[k - 1] != testList[1] - testList[0])
+                        isArithmetic = false;
 
-                if (isArithmeticList.Contains(false))
-                    resultList.Add(false);
-                else
-                    resultList.Add(true);
+                result.Add(isArithmetic);
             }
-
-            return resultList.ToArray();
+            return result;
         }
     }
 }
