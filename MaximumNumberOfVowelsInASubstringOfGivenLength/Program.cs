@@ -18,23 +18,25 @@ namespace MaximumNumberOfVowelsInASubstringOfGivenLength
         public static int MaximumNumberOfVowelsInASubstringOfGivenLength(string s, int k)
         {
             var allVowels = new List<char>() { 'a', 'e', 'i', 'o', 'u' };
+            int counter = 0;
             int max = 0;
-            int right = k - 1;
-            string newS = String.Concat(s.Take(k));
 
-            int count = newS.Count(x => allVowels.Contains(x));
-            max = Math.Max(max, count);
+            for (int i = 0; i < k; i++)
+                if (allVowels.Contains(s[i]))
+                    counter++;
 
+            max = Math.Max(max, counter);
+            int left = 0, right = k - 1;
             while (right < s.Length - 1)
             {
-                if (allVowels.Contains(newS[0]))
-                    count--;
-                newS = newS.Remove(0, 1);
+                if (allVowels.Contains(s[left]))
+                    counter--;
+                left++;
                 right++;
                 if (allVowels.Contains(s[right]))
-                    count++;
-                newS += s[right];
-                max = Math.Max(max, count);
+                    counter++;
+
+                max = Math.Max(max, counter);
             }
             return max;
         }
