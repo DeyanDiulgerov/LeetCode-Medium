@@ -20,7 +20,7 @@ namespace MaxConsecutiveOnesIII
         {
             int left = 0;
             int max = 0;
-            int countZeroes = 0;
+            int countZeroes = 0; 
 
             for (int right = 0; right < nums.Length; right++)
             {
