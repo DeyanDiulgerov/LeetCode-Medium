@@ -15,42 +15,39 @@ namespace ProductOfArrayExceptSelf
             Console.WriteLine(String.Join(",", ProductOfArrayExceptSelf(new int[] { -1, 1, 0, -3, 3 })));
         }
 
-        public static int[] ProductOfArrayExceptSelf(int[] nums)
+        public static int[] ProductExceptSelf(int[] nums)
         {
-            var listed = new List<int>(nums);
-            int n = listed.Count();
-            var result = new int[n];
+            int n = nums.Length;
+            var resultArr = new int[n];
+            if (nums.Count(x => x == 0) > 1)
+                return resultArr;
+
             var product = 1;
-            for (int i = 0; i < listed.Count(); i++)
-                product *= listed[i];
-
-            var tempProduct = product;
-
             for (int i = 0; i < n; i++)
             {
-                if (listed[i] == 0)
-                {
-                    var newProd = 1;
-
-                    for (int j = 0; j < listed.Count(); j++)
-                    {
-                        if (i == j)
-                            continue;
-
-                        newProd *= listed[j];
-                    };
-
-                    result[i] = newProd;
-                }
-                else
-                {
-                    product /= listed[i];
-                    result[i] = product;
-                    product = tempProduct;
-                }
+                if (nums[i] == 0)
+                    continue;
+                product *= nums[i];
             }
 
-            return result;
+            if(nums.Count(x => x == 0) == 1)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if (nums[i] == 0)
+                        resultArr[i] = product;
+                }
+            }
+            //if(nums.Count(x => x == 0) == 0)
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    var newNum = product / nums[i];
+                    resultArr[i] = newNum;
+                }
+            }
+            return resultArr;
         }
     }
 }
