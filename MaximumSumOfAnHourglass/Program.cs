@@ -39,28 +39,18 @@ namespace MaximumSumOfAnHourglass
             int n = grid[0].Length;
             int max = 0;
 
-            for (int row = 0; row < m; row++)
+            for (int row = 0; row < m - 2; row++)
             {
-                int newSum = 0;
-                if (row + 2 >= m)
-                    break;
-                for (int col = 0; col < n; col++)
+                for (int col = 0; col < n - 2; col++)
                 {
-                    if (col + 2 >= n)
-                        break;
-
-                    newSum = 0;
+                    int newSum = 0;
                     for (int r = row; r < row + 3; r++)
                     {
-                        if (r == row + 1)
-                            newSum += grid[r][col + 1];
-                        else
-                        {
+                        if (r != row + 1)
                             for (int c = col; c < col + 3; c++)
-                            {
                                 newSum += grid[r][c];
-                            }
-                        }
+                        else
+                            newSum += grid[r][col + 1];
                     }
                     max = Math.Max(max, newSum);
                 }
