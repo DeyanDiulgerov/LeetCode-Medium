@@ -10,6 +10,8 @@ namespace IntegerToRoman
     {
         static void Main(string[] args)
         {
+            // IntegerToRoman == many if check - better performane but uglier code
+            // IntegerToRomanMap == using HashMap - poorer performance
             Console.WriteLine(IntegerToRoman(20));
             Console.WriteLine(IntegerToRoman(3));
             Console.WriteLine(IntegerToRoman(58));
@@ -19,6 +21,7 @@ namespace IntegerToRoman
             Console.WriteLine(IntToRomanMap(58));
             Console.WriteLine(IntToRomanMap(1994));
         }
+        //Using Map - poorer performance
         public static string IntToRomanMap(int num)
         {
             var numToRomanMap = new Dictionary<int, string>()
@@ -59,6 +62,7 @@ namespace IntegerToRoman
             }
             return result;
         }
+        // Many if checks - better performace - uglier code
         public static string IntegerToRoman(int num)
         {
             var result = "";
