@@ -64,13 +64,13 @@ namespace MaxAreaOfIsland
             seenPositions.Add(curr);
             newPos.Add(curr);
 
-            if (col + 1 < n && grid[row][col + 1] == 1 && !seenPositions.Contains($"{row}-{col + 1}"))
+            if (col + 1 < n && grid[row][col + 1] == 1 && !newPos.Contains($"{row}-{col + 1}"))
                 CheckNeigbours(grid, row, col + 1, m, n, seenPositions, newPos);
-            if (col - 1 >= 0 && grid[row][col - 1] == 1 && !seenPositions.Contains($"{row}-{col - 1}"))
+            if (col - 1 >= 0 && grid[row][col - 1] == 1 && !newPos.Contains($"{row}-{col - 1}"))
                 CheckNeigbours(grid, row, col - 1, m, n, seenPositions, newPos);
-            if (row + 1 < m && grid[row + 1][col] == 1 && !seenPositions.Contains($"{row + 1}-{col}"))
+            if (row + 1 < m && grid[row + 1][col] == 1 && !newPos.Contains($"{row + 1}-{col}"))
                 CheckNeigbours(grid, row + 1, col, m, n, seenPositions, newPos);
-            if (row - 1 >= 0 && grid[row - 1][col] == 1 && !seenPositions.Contains($"{row - 1}-{col}"))
+            if (row - 1 >= 0 && grid[row - 1][col] == 1 && !newPos.Contains($"{row - 1}-{col}"))
                 CheckNeigbours(grid, row - 1, col, m, n, seenPositions, newPos);
         }
     }
