@@ -33,6 +33,7 @@ namespace QueensThatCanAttackTheKing
                 Console.WriteLine(String.Join(",", item));
             foreach (var item in QueensThatCanAttackTheKing(queens2, new int[] { 3, 3 }))
                 Console.WriteLine(String.Join(",", item));
+            
         }
 
         public static IList<IList<int>> QueensThatCanAttackTheKing(int[][] queens, int[] king)
