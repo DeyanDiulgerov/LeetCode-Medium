@@ -10,12 +10,24 @@ namespace ValidateIPAddress
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(ValidateIPAddress("20EE:FGb8:85a3:0:0:8A2E:0370:7334"));
-            Console.WriteLine(ValidateIPAddress("12.12.12.12.12"));
-            Console.WriteLine(ValidateIPAddress("1.1.1.1."));
-            Console.WriteLine(ValidateIPAddress("172.16.254.1"));
-            Console.WriteLine(ValidateIPAddress("2001:0db8:85a3:0:0:8A2E:0370:7334"));
-            Console.WriteLine(ValidateIPAddress("256.256.256.256"));
+             Console.WriteLine(ValidIPAddress("1e1.4.5.6"));
+            Console.WriteLine(ValidIPAddress("172.16.254.1"));
+            Console.WriteLine(ValidIPAddress("2001:0db8:85a3:0:0:8A2E:0370:7334"));
+            // TEST IPv4 Addresses:
+            Console.WriteLine(ValidIPAddress("256.256.256.256"));// INVALID
+            Console.WriteLine(ValidIPAddress("192.168.1.1"));// VALID
+            Console.WriteLine(ValidIPAddress("192.168.1.0"));// VALID
+            Console.WriteLine(ValidIPAddress("192.168.01.1"));// INVALID
+            Console.WriteLine(ValidIPAddress("192.168.1.00"));// INVALID
+            // TEST IPv6 Addresses:
+            Console.WriteLine(ValidIPAddress
+                ("2001:0db8:85a3:0000:0000:8a2e:0370:7334"));// VALID
+            Console.WriteLine(ValidIPAddress
+                ("2001:db8:85a3:0:0:8A2E:0370:7334"));// VALID
+            Console.WriteLine(ValidIPAddress
+                ("2001:0db8:85a3::8A2E:037j:7334"));// INVALID
+            Console.WriteLine(ValidIPAddress
+                ("02001:0db8:85a3:0000:0000:8a2e:0370:7334"));// INVALID
         }
 
         public static string ValidateIPAddress(string queryIP)
