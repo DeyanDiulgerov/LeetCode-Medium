@@ -20,51 +20,46 @@ namespace ValidateIPAddress
 
         public static string ValidateIPAddress(string queryIP)
         {
-            if (queryIP.Contains('.'))
+            // IPv4
+            if (queryIP.Contains("."))
             {
-                var splitted = queryIP.Split('.');
+                string[] splitted = queryIP.Split('.');
                 if (splitted.Length != 4)
                     return "Neither";
 
                 for (int i = 0; i < splitted.Length; i++)
                 {
-                    if (splitted[i] == "")
+                    if (splitted[i].Length > 3)
                         return "Neither";
-                    if (!splitted[i].All(x => char.IsDigit(x)))
+                   if (splitted[i].Any(x => char.IsLetter(x)) || splitted[i].Length == 0)
                         return "Neither";
-                    if (splitted[i].Length > 9)
+                    int currNum = int.Parse(splitted[i]);
+                    if (currNum < 0 || currNum > 255)
                         return "Neither";
-                    if (int.Parse(splitted[i]) > 255)
-                        return "Neither";
-                    if (splitted[i].Length > 1 && splitted[i][0] == '0')
+                    if (currNum.ToString() != splitted[i])
                         return "Neither";
                 }
-
                 return "IPv4";
             }
-            else
+            // IPv6
+            else if(queryIP.Contains(":"))
             {
-                var splitted = queryIP.Split(':');
+                string[] splitted = queryIP.Split(':');
+                var allowedChars = new List<char>()
+                {'a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F', };
+
                 if (splitted.Length != 8)
                     return "Neither";
-
-                var hexadecimalChars = new List<char>()
-                {'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F' };
-
                 for (int i = 0; i < splitted.Length; i++)
                 {
                     if (splitted[i].Length < 1 || splitted[i].Length > 4)
                         return "Neither";
-
-                    for (int j = 0; j < splitted[i].Length; j++)
-                    {
-                        if (char.IsLetter(splitted[i][j]) && !hexadecimalChars.Contains(splitted[i][j]))
-                            return "Neither";
-                    }
+                    if (splitted[i].Any(x => char.IsLetter(x) && !allowedChars.Contains(x)))
+                        return "Neither";
                 }
-
                 return "IPv6";
             }
+            return "Neither";
         }
     }
 }
