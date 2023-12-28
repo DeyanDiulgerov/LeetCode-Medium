@@ -23,7 +23,7 @@ namespace AsteroidCollision
             Console.WriteLine(String.Join(",", AsteroidCollision(new int[] { 5, 10, -5 })));
             Console.WriteLine(String.Join(",", AsteroidCollision(new int[] { 8, -8 })));
         }
-
+        // Stack
         public static int[] AsteroidCollision(int[] asteroids)
         {
             Stack<int> stack = new Stack<int>();
@@ -53,6 +53,32 @@ namespace AsteroidCollision
             }
 
             return result;
+        }
+        //Brute-force
+        public static int[] AsteroidCollision(int[] asteroids)
+        {
+            var listed = new List<int>(asteroids);
+            for (int i = 0; i < listed.Count(); i++)
+            {
+                if (listed[i] < 0 && i != 0)
+                {
+                    if (listed[i - 1] > 0)
+                    {
+                        if (-listed[i] > listed[i - 1])
+                            listed.RemoveAt(i - 1);
+                        else if (-listed[i] < listed[i - 1])
+                            listed.RemoveAt(i);
+                        else// they are equal
+                        {
+                            listed.RemoveAt(i);
+                            listed.RemoveAt(i - 1);
+                        }
+
+                        i = -1;
+                    }
+                }
+            }
+            return listed.ToArray();
         }
     }
 }
