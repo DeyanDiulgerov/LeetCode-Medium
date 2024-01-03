@@ -26,37 +26,35 @@ namespace InsertDeleteGetRandom
             {
                 set = new List<int>();
             }
-
             public bool Insert(int val)
             {
-                if (!set.Contains(val))
+                if(!set.Contains(val))
                 {
                     set.Add(val);
-                    Console.WriteLine(true);
+                    Console.WriteLine($"{val} was added to the set!");
                     return true;
                 }
-                Console.WriteLine(false);
+                Console.WriteLine($"{val} is already in the set");
                 return false;
             }
-
             public bool Remove(int val)
             {
-                if (set.Contains(val))
+                if(set.Contains(val))
                 {
                     set.Remove(val);
-                    Console.WriteLine(true);
+                    Console.WriteLine($"{val} was removed from the set!");
                     return true;
                 }
-                Console.WriteLine(false);
+                Console.WriteLine($"The set did not contain {val}");
                 return false;
             }
-
             public int GetRandom()
             {
                 Random random = new Random();
                 int index = random.Next(set.Count);
-                Console.WriteLine(set[index]);
-                return set[index];
+                int result = set[index];
+                Console.WriteLine($"The random element is {result}");
+                return result;
             }
         }
     }
