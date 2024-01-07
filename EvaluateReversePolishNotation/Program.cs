@@ -15,6 +15,7 @@ namespace EvaluateReversePolishNotation
             Console.WriteLine(EvaluateReversePolishNotation(new string[]
             { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" }));
         }
+        
         public static int EvaluateReversePolishNotation(string[] tokens)
         {
             var stack = new Stack<int>();
