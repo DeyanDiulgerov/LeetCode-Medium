@@ -10,45 +10,47 @@ namespace MinStack
     {
         static void Main(string[] args)
         {
+            MinStack stack = new MinStack();
+            stack.Push(0);
+            stack.Push(1);
+            stack.Push(0);
+            stack.GetMin();
+            stack.Pop();
+            stack.GetMin();
         }
         public class MinStack
         {
-            Stack<int> stack = null;
-            Stack<int> minStack = null;
-            int min = 0;
+            Stack<int> allData;
+            Stack<int> minStack;
             public MinStack()
             {
-                stack = new Stack<int>();
+                allData = new Stack<int>();
                 minStack = new Stack<int>();
             }
 
             public void Push(int val)
             {
-                if (stack.Count() == 0)
-                {
-                    min = val;
-                }
-                min = Math.Min(min, val);
-                stack.Push(val);
-                minStack.Push(val);
-            }
+                if (minStack.Count() == 0 || minStack.Peek() >= val)
+                    minStack.Push(val);
 
+                allData.Push(val);
+            }
             public void Pop()
             {
-                stack.Pop();
-                minStack.Pop();
-                if (minStack.Count > 0)
-                    min = minStack.Peek();
-            }
+                if (minStack.Peek() == allData.Peek())
+                    minStack.Pop();
 
+                allData.Pop();
+            }
             public int Top()
             {
-                return stack.Peek();
+                Console.WriteLine(allData.Peek());
+                return allData.Peek();
             }
-
             public int GetMin()
             {
-                return min;
+                Console.WriteLine(minStack.Peek());
+                return minStack.Peek();
             }
         }
     }
