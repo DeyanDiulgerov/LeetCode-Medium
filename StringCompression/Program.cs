@@ -16,6 +16,34 @@ namespace StringCompression
             Console.WriteLine(StringCompression(new char[]
             {'a', 'b', 'b', 'b','b', 'b', 'b','b', 'b', 'b','b', 'b', 'b',}));
         }
+        // Two pointers Approach
+        public static int Compress(char[] chars)
+        {
+            int left = 0, right = 1;
+            string substring = "";
+            int indexCount = 0;
+
+            while (right <= chars.Length)
+            {
+                while (right < chars.Length && chars[left] == chars[right])
+                    right++;
+
+                substring += chars[left];
+                indexCount++;
+                if (right - left != 1)
+                    substring += right - left;
+                indexCount++;
+                left = right;
+                right = left + 1;
+            }
+            for (int i = 0; i < substring.Length; i++)
+            {
+                chars[i] = substring[i];
+            }
+
+            Console.WriteLine(String.Join(",", chars.Take(substring.Length)));
+            return substring.Length;
+        }
         public static int StringCompression(char[] chars)
         {
             string newS = String.Concat(chars);
