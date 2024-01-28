@@ -27,6 +27,22 @@ namespace KeysAndRooms
             Console.WriteLine(KeysAndRooms(rooms2));
 
         }
+        //DFS
+        public static bool CanVisitAllRooms(IList<IList<int>> rooms)
+        {
+            HashSet<int> visited = new HashSet<int>();
+            void dfs(int room)
+            {
+                visited.Add(room);
+                foreach (var i in rooms[room])
+                {
+                    if (!visited.Contains(i))
+                        dfs(i);
+                }
+            }
+            dfs(0);
+            return visited.Count() == rooms.Count();
+        }
         public static bool KeysAndRooms(IList<IList<int>> rooms)
         {
             HashSet<int> allKeys = new HashSet<int>();
