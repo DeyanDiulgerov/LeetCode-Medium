@@ -39,27 +39,24 @@ namespace MaxNumberOfKSumPairs
         // Two Pointer Approach
         public static int MaxOperationsTwoPointer(int[] nums, int k)
         {
+            int result = 0;
             Array.Sort(nums);
             var listed = new List<int>(nums);
             int left = 0, right = listed.Count() - 1;
-            int operations = 0;
-
             while (left < right)
             {
-                if (listed[left] + listed[right] == k)
-                {
-                    operations++;
-                    listed.RemoveAt(right);
-                    listed.RemoveAt(left);
-                    left = 0;
-                    right = listed.Count() - 1;
-                }
-                else if (listed[left] + listed[right] < k)
+                if (listed[left] + listed[right] < k)
                     left++;
-                else //nums[left] + nums[right] > k
+                else if (listed[left] + listed[right] > k)
                     right--;
+                else
+                {
+                    result++;
+                    left++;
+                    right--;
+                }
             }
-            return operations;
+            return result;
         }
     }
 }
