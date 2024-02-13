@@ -17,7 +17,23 @@ namespace LongestConsecutiveSequence
             Console.WriteLine(LongestConsecutiveSequence(new int[] { 100, 4, 200, 1, 3, 2 }));
             Console.WriteLine(LongestConsecutiveSequence(new int[] { 0, 3, 7, 2, 5, 8, 4, 6, 0, 1 }));
         }
+        // Without Sorting
+        public static int LongestConsecutive(int[] nums)
+        {
+            int max = 0;
+            HashSet<int> set = new HashSet<int>(nums);
+            foreach (int num in nums)
+            {
+                if (set.Contains(num - 1))
+                    continue;
+                int length = 0;
+                while (set.Contains(num + length))
+                    length++;
 
+                max = Math.Max(max, length);
+            }
+            return max;
+        }
         public static int LongestConsecutiveSequence(int[] nums)
         {
             if (nums.Count() == 0)
