@@ -21,7 +21,41 @@ namespace LongestPalindromicSubstring
             Console.WriteLine(LongestPalindrome("aabbbc"));
             Console.WriteLine(LongestPalindrome("ababa"));
         }
-
+        // My Way
+        public static string LongestPalindrome(string s)
+        {
+            int left = 0, right = s.Length;
+            int permLeft = left, permRight = right;
+            string result = "";
+            while (permLeft < permRight)
+            {
+                string substring = "";
+                while (left < right)
+                {
+                    substring += s[left];
+                    bool check = IsPalindrome(substring);
+                    if (check && substring.Length > result.Length)
+                        result = substring;
+                    left++;
+                }
+                permLeft++;
+                left = permLeft;
+            }
+            return result;
+        }
+        public static bool IsPalindrome(string text)
+        {
+            int left = 0, right = text.Length - 1;
+            while (left < right)
+            {
+                if (text[left] != text[right])
+                    return false;
+                left++;
+                right--;
+            }
+            return true;
+        }
+        // Not Mine - Leetcode Solution
         public static string LongestPalindrome(string s)
         {
             if (s.Length == 0 || s == String.Empty)
