@@ -15,8 +15,22 @@ namespace HouseRobber
             Console.WriteLine(HouseRobber(new int[] { 1, 2, 3, 1 }));
             Console.WriteLine(HouseRobber(new int[] { 2, 7, 9, 3, 1 }));
         }
-
-        public static int HouseRobber(int[] nums)
+        // My Way!!!
+        public static int Rob(int[] nums)
+        {
+            int n = nums.Length;
+            if (n == 1)
+                return nums[0];
+            for (int i = 2; i < n; i++)
+            {
+                if (i == 2)
+                    nums[i] += nums[i - 2];
+                else
+                    nums[i] += Math.Max(nums[i - 2], nums[i - 3]);
+            }
+            return Math.Max(nums[n - 1], nums[n - 2]);
+        }
+        public static int HouseRobber2(int[] nums)
         {
             int pp = 0;
             int p = nums[0];
