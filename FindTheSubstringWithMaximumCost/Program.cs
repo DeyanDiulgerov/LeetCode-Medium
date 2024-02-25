@@ -27,6 +27,7 @@ namespace FindTheSubstringWithMaximumCost
                 else
                     map.Add(c, i);
             }
+            
             Console.WriteLine(String.Join(",", map));
             int max = 0;
             int newMax = 0;
