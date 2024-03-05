@@ -15,6 +15,7 @@ namespace MinimumLengthOfStringAfterDeletingSimiliarEnds
             Console.WriteLine(MinimumLengthOfStringAfterDeletingSimiliarEnds("cabaabac"));
             Console.WriteLine(MinimumLengthOfStringAfterDeletingSimiliarEnds("aabccabba"));
         }
+        //Trim Ends Way
         public static int MinimumLengthOfStringAfterDeletingSimiliarEnds(string s)
         {
             int left = 0, right = s.Length - 1;
