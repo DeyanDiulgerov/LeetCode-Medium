@@ -10,9 +10,6 @@ namespace MaximizeHappinessOfSelectedChildren
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine(AppleRedistributionIntoBoxes(new int[] {1,3,2}, new int[] { 4, 3, 1, 5, 2 }));
-            //Console.WriteLine(AppleRedistributionIntoBoxes(new int[] { 5, 5, 5 }, new int[] { 2, 4, 2, 7 }));
-
             Console.WriteLine(MaximizeHappinessOfSelectedChildren(new int[] { 12, 1, 42 }, 3));
             Console.WriteLine(MaximizeHappinessOfSelectedChildren(new int[] { 1, 2, 3 }, 2));
             Console.WriteLine(MaximizeHappinessOfSelectedChildren(new int[] { 1, 1, 1, 1 }, 2));
