@@ -13,7 +13,7 @@ namespace SortColors
             Console.WriteLine(String.Join(",", SortColors(new int[] { 2, 0, 2, 1, 1, 0 })));
             Console.WriteLine(String.Join(",", SortColors(new int[] { 2, 0, 1 })));
         }
-        //2nd way - In Place
+        //2nd way - In-Place
         public static int[] SortColors(int[] nums)
         {
             var sorted = new List<int>(nums);
