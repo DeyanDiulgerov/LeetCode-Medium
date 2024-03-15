@@ -13,7 +13,51 @@ namespace SortColors
             Console.WriteLine(String.Join(",", SortColors(new int[] { 2, 0, 2, 1, 1, 0 })));
             Console.WriteLine(String.Join(",", SortColors(new int[] { 2, 0, 1 })));
         }
+        //2nd way - In Place
+        public static int[] SortColors(int[] nums)
+        {
+            var sorted = new List<int>(nums);
+            sorted.Sort();
+            if (nums.SequenceEqual(sorted))
+                return nums;
 
+            int zeroCount = 0, oneCount = 0, twoCount = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                switch (nums[i])
+                {
+                    case 0:
+                        zeroCount++;
+                        break;
+                    case 1:
+                        oneCount++;
+                        break;
+                    case 2:
+                        twoCount++;
+                        break;
+                }
+            }
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if(zeroCount > 0)
+                {
+                    nums[i] = 0;
+                    zeroCount--;
+                }
+                else if(oneCount > 0)
+                {
+                    nums[i] = 1;
+                    oneCount--;
+                }
+                else
+                {
+                    nums[i] = 2;
+                    twoCount--;
+                }
+            }
+            return nums;
+        }
+        //1st Way - really old
         public static int[] SortColors(int[] nums)
         {
             var zeroesCount = nums.Where(x => x == 0).Count();
