@@ -21,41 +21,19 @@ namespace InsertDeleteGetRandom
         }
         public class RandomizedSet
         {
-            List<int> set;
+            HashSet<int> set;
+            Random random;
             public RandomizedSet()
             {
-                set = new List<int>();
-            }
+                set = new HashSet<int>();
+                random = new Random();
+            }            
             public bool Insert(int val)
-            {
-                if(!set.Contains(val))
-                {
-                    set.Add(val);
-                    Console.WriteLine($"{val} was added to the set!");
-                    return true;
-                }
-                Console.WriteLine($"{val} is already in the set");
-                return false;
-            }
+                => set.Add(val);  
             public bool Remove(int val)
-            {
-                if(set.Contains(val))
-                {
-                    set.Remove(val);
-                    Console.WriteLine($"{val} was removed from the set!");
-                    return true;
-                }
-                Console.WriteLine($"The set did not contain {val}");
-                return false;
-            }
+                => set.Remove(val);
             public int GetRandom()
-            {
-                Random random = new Random();
-                int index = random.Next(set.Count);
-                int result = set[index];
-                Console.WriteLine($"The random element is {result}");
-                return result;
-            }
+                => set.ElementAt(random.Next(set.Count));
         }
     }
 }
