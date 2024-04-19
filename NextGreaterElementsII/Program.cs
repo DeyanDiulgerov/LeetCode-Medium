@@ -17,50 +17,29 @@ namespace NextGreaterElementsII
 
         public static int[] NextGreaterElementsII(int[] nums)
         {
-            var result = new int[nums.Length];
-
-            for (int i = 0; i < nums.Length; i++)
+            int n = nums.Length;
+            int[] res = new int[n];
+            for (int i = 0; i < n; i++)
             {
-                //Console.WriteLine(String.Join(",", result));
-
-                int j = i + 1;
-                bool repeated = false;
-                if (j >= nums.Length)
+                for (int j = i + 1; j < n + 1; j++)
                 {
-                    j = 0;
-                    repeated = true;
-                }
-
-                if (nums[i] >= nums[j])
-                {
-                    while (nums[i] >= nums[j])
+                    if (j == n)
+                        j = 0;
+                    if (nums[j] > nums[i])
                     {
-                        j++;
-
-                        if (j >= nums.Length)
-                        {
-                            j = 0;
-                            repeated = true;
-                        }
-
-                        if (nums[j] > nums[i])
-                            result[i] = nums[j];
-
-                        if (i == j && repeated)
-                        {
-                            result[i] = -1;
-                            break;
-                        }
-
-                        if (nums[j] > nums[i])
-                            result[i] = nums[j];
+                        res[i] = nums[j];
+                        break;
                     }
+                    if (j == i)
+                    {
+                        res[i] = -1;
+                        break;
+                    }
+                    if (j == n - 1)
+                        j = -1;
                 }
-                else
-                    result[i] = nums[j];
             }
-
-            return result;
+            return res;
         }
     }
 }
