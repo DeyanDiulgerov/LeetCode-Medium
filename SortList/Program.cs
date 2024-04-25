@@ -13,17 +13,16 @@ namespace SortList
         }
         public static ListNode SortList(ListNode head)
         {
-            List<int> sorted = new List<int>();
-            while (head != null)
+            var list = new List<int>();
+            while(head != null)
             {
-                sorted.Add(head.val);
+                list.Add(head.val);
                 head = head.next;
             }
-            sorted.Sort();
-            sorted.Reverse();
+            list.Sort();
             ListNode res = null;
-            for (int i = 0; i < sorted.Count(); i++)
-                res = new ListNode(sorted[i], res);
+            for(int i = list.Count - 1; i >= 0; i--)
+                res = new ListNode(list[i], res);
             return res;
         }
         public class ListNode
