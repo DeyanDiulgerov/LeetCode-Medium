@@ -16,21 +16,17 @@ namespace TwoSumIIInputArrayIsSorted
         }
         public static int[] TwoSumIIInputArrayIsSorted(int[] numbers, int target)
         {
-            var numAndIndexDict = new Dictionary<int, int>();
-
-            for (int i = 0; i < numbers.Length; i++)
+            int left = 0, right = numbers.Length - 1;
+            while(left < right)
             {
-                var diff = target - numbers[i];
-
-                if (!numAndIndexDict.ContainsKey(diff))
-                {
-                    if (!numAndIndexDict.ContainsKey(numbers[i]))
-                        numAndIndexDict.Add(numbers[i], i + 1);
-                }
-                else
-                    return new int[] { numAndIndexDict[diff], i + 1 };
+                if(numbers[left] + numbers[right] > target)
+                    right--;
+                else if(numbers[left] + numbers[right] < target)
+                    left++;
+                else    
+                    break;
             }
-            return new int[] { };
+            return new int[] {left + 1, right + 1};
         }
     }
 }
