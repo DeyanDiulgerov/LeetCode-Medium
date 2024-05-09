@@ -17,20 +17,17 @@ namespace MaximizeHappinessOfSelectedChildren
         }
         public static long MaximizeHappinessOfSelectedChildren(int[] happiness, int k)
         {
-            int n = happiness.Length;
-            long result = 0;
-            int happyCounter = 0;
             Array.Sort(happiness);
-            for (int i = n - 1; i >= 0; i--)
+            long sumHappy = 0;
+            int decreasedCount = 0;
+            for(int i = happiness.Length - 1; i >= 0; i--)
             {
-                if (happiness[i] - happyCounter < 0)
+                if(k == decreasedCount || happiness[i] - decreasedCount <= 0)
                     break;
-                result += happiness[i] - happyCounter;
-                happyCounter++;
-                if (happyCounter == k)
-                    break;
+                sumHappy += happiness[i] - decreasedCount;
+                decreasedCount++;
             }
-            return result;
+            return sumHappy;
         }
     }
 }
