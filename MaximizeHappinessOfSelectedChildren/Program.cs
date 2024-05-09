@@ -22,9 +22,10 @@ namespace MaximizeHappinessOfSelectedChildren
             int decreasedCount = 0;
             for(int i = happiness.Length - 1; i >= 0; i--)
             {
-                if(k == decreasedCount || happiness[i] - decreasedCount <= 0)
+                int curr = happiness[i] - decreasedCount;
+                if(k == decreasedCount || curr <= 0)
                     break;
-                sumHappy += happiness[i] - decreasedCount;
+                sumHappy += curr;
                 decreasedCount++;
             }
             return sumHappy;
