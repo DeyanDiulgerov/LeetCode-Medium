@@ -41,46 +41,54 @@ namespace ValidSudoku
 
         public static bool IsValidSudoku(char[][] board)
         {
-            // board.Length == 9;
-            for (int i = 0; i < board.Length; i++)
+            //board.Length == board[0].Length == 9
+            // Checking each row and col
+            for(int i = 0; i < 9; i++)
             {
-                HashSet<int> rowRecords = new HashSet<int>();
-                HashSet<int> colRecords = new HashSet<int>();
-                for (int j = 0; j < board[0].Length; j++)
+                var seen = new HashSet<char>();
+                for(int col = 0; col < 9; col++)
                 {
-                    if (board[i][j] != '.')
-                    {
-                        if (rowRecords.Contains(board[i][j])) return false;
-                        rowRecords.Add(board[i][j]);
-                    }
-                    if (board[j][i] != '.')
-                    {
-                        if (colRecords.Contains(board[j][i])) return false;
-                        colRecords.Add(board[j][i]);
-                    }
+                    if(!char.IsDigit(board[i][col]))
+                        continue;
+                    if(seen.Contains(board[i][col]))
+                        return false;
+                    seen.Add(board[i][col]);
+                }
+                seen = new HashSet<char>();
+                for(int row = 0; row < 9; row++)
+                {
+                    if(!char.IsDigit(board[row][i]))
+                        continue;
+                    if(seen.Contains(board[row][i]))
+                        return false;
+                    seen.Add(board[row][i]);
                 }
             }
-
-            //Checking each 3x3 square
-            for (int i = 0; i < board.Length; i++)
+            //Check 3 x 3 squares
+            int startRow = 0, startCol = 0;
+            while(startRow < 9 && startCol < 9)
             {
-                for (int j = 0; j < board[0].Length; j++)
+                var seen = new HashSet<char>();
+                for(int row = startRow; row < startRow + 3; row++)
                 {
-                    HashSet<int> sqRecords = new HashSet<int>();
-                    for (int m = i; m < i + 3; m++)
+                    for(int col = startCol; col < startCol + 3; col++)
                     {
-                        for (int n = j; n < j + 3; n++)
-                        {
-                            if (board[m][n] == '.') continue;
-                            if (sqRecords.Contains(board[m][n])) return false;
-                            sqRecords.Add(board[m][n]);
-                        }
+                        if(!char.IsDigit(board[row][col]))
+                            continue;
+                        if(seen.Contains(board[row][col]))  
+                            return false;
+                        seen.Add(board[row][col]);
                     }
-                    j += 2;
                 }
-                i += 2;
+                startCol += 3;
+                if(startCol == 9)
+                {
+                    startCol = 0;
+                    startRow += 3;
+                }
+                if(startRow == 9)
+                    break;
             }
-
             return true;
         }
     }
