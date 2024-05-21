@@ -15,17 +15,11 @@ namespace HIndex
         }
         public static int HIndex(int[] citations)
         {
-            int n = citations.Length;
-
-            while (n > 0)
-            {
-                int count = citations.Count(x => x >= n);
-                if (count >= n)
-                    return n;
-                else
-                    n--;
-            }
-            return n;
+            int h = citations.Length + 1;
+            while(h-- > 0)
+                if(citations.Count(x => x >= h) >= h)
+                    break;
+            return h;
         }
     }
 }
