@@ -23,40 +23,23 @@ namespace RemoveDuplicatesFromSortedArrayII
 
         public static int RemoveDuplicatesFromSortedArrayII(int[] nums)
         {
-            if (nums.Length <= 2)
-                return nums.Length;
-            if (nums.All(x => x == nums[0]))
-                return nums.Take(2).Count();
-            int left = 0, right = 0;
-            int indexCount = 0;
-            int distinctCount = 0;
-
-            while (left < nums.Length - 1)
-            {
-                left = right;
-                right = left + 1;
-                if (right >= nums.Length)
+            int index = 0;
+            int left = 0, right = 1;
+            while(right <= nums.Length)
                 {
-                    nums[indexCount] = nums[left];
-                    distinctCount++;
-                    break;
-                }
-                if (nums[left] == nums[right])
-                {
-                    nums[indexCount] = nums[left];
-                    indexCount++;
-                    distinctCount++;
-                }
-                nums[indexCount] = nums[left];
-                indexCount++;
-                distinctCount++;
-
-                while (right < nums.Length - 1 && nums[left] == nums[right])
+                while(right < nums.Length && nums[left] == nums[right])
                     right++;
-                if (right >= nums.Length - 1 && nums[right] == nums[right - 1])
-                    break;
+                if(right - left != 1)
+                {
+                    nums[index] = nums[left];
+                    index++;
+                }
+                nums[index] = nums[left];
+                index++;
+                left = right;
+                right++;
             }
-            return nums.Take(distinctCount).Count();
+            return index;
         }
     }
 }
