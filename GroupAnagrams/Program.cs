@@ -30,22 +30,16 @@ namespace GroupAnagrams
 
         public static IList<IList<string>> GroupAnagrams(string[] strs)
         {
-            var dictAnagramAndAllWords = new Dictionary<string, IList<string>>();
-
-            for (int i = 0; i < strs.Length; i++)
+            var map = new Dictionary<string, IList<string>>();
+            foreach(string word in strs)
             {
-                char[] arr = strs[i].ToCharArray();
-                Array.Sort(arr);
-                var sortedWord = new string(arr);
-
-                if (!dictAnagramAndAllWords.ContainsKey(sortedWord))
-                    dictAnagramAndAllWords.Add(sortedWord, new List<string>() { strs[i] });
+                string sorted = String.Concat(word.OrderBy(x => x));
+                if(!map.ContainsKey(sorted))
+                    map.Add(sorted, new List<string>() {word});
                 else
-                    dictAnagramAndAllWords[sortedWord].Add(strs[i]);
+                    map[sorted].Add(word);
             }
-
-            var result = dictAnagramAndAllWords.Values.ToList();
-            return result;
+            return map.Values.ToList();
         }
     }
 }
