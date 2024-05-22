@@ -18,29 +18,26 @@ namespace EvaluateReversePolishNotation
         
         public static int EvaluateReversePolishNotation(string[] tokens)
         {
-            var stack = new Stack<int>();
-            var validOperators = new List<string>()
-            { "+", "-", "*", "/" };
-
-            for (int i = 0; i < tokens.Length; i++)
+            Stack<int> stack = new Stack<int>();
+            HashSet<string> operators = new HashSet<string>()
+            {"+", "-", "*", "/"};
+            foreach(string token in tokens)
             {
-                if (validOperators.Contains(tokens[i]))
+                if(!operators.Contains(token))
+                    stack.Push(int.Parse(token));
+                else
                 {
-                    var first = stack.Pop();
-                    var second = stack.Pop();
-
-                    if (tokens[i] == "+")
-                        stack.Push((second + first));
-                    else if (tokens[i] == "-")
+                    int first = stack.Pop();
+                    int second = stack.Pop();
+                    if(token == "+")
+                        stack.Push(second + first);
+                    else if(token == "-")
                         stack.Push(second - first);
-                    else if (tokens[i] == "*")
+                    else if(token == "*")
                         stack.Push(second * first);
-                    else if (tokens[i] == "/")
+                    else if(token == "/")
                         stack.Push(second / first);
                 }
-                else
-                    stack.Push(int.Parse(tokens[i]));
-                //Console.WriteLine(String.Join(",", stack.Reverse()));
             }
             return stack.First();
         }
