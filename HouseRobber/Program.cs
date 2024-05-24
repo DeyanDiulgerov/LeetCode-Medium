@@ -19,15 +19,13 @@ namespace HouseRobber
         public static int Rob(int[] nums)
         {
             int n = nums.Length;
-            if (n == 1)
+            if(n == 1)
                 return nums[0];
-            for (int i = 2; i < n; i++)
-            {
-                if (i == 2)
-                    nums[i] += nums[i - 2];
-                else
-                    nums[i] += Math.Max(nums[i - 2], nums[i - 3]);
-            }
+            else if(n == 2)
+                return Math.Max(nums[0], nums[1]);
+            nums[2] += nums[0];
+            for(int i = 3; i < n; i++)
+                nums[i] += Math.Max(nums[i - 2], nums[i - 3]);
             return Math.Max(nums[n - 1], nums[n - 2]);
         }
         public static int HouseRobber2(int[] nums)
