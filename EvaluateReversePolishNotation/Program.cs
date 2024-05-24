@@ -23,6 +23,8 @@ namespace EvaluateReversePolishNotation
             {"+", "-", "*", "/"};
             foreach(string token in tokens)
             {
+                //if(!"+-*/".Contains(token))
+                    //stack.Push(int.Parse(token));
                 if(!operators.Contains(token))
                     stack.Push(int.Parse(token));
                 else
