@@ -17,22 +17,13 @@ namespace SingleNumberIII
 
         public static int[] SingleNumberIII(int[] nums)
         {
-            var numAndCountDict = new Dictionary<int, int>();
-
-            for (int i = 0; i < nums.Length; i++)
+            HashSet<int> set = new HashSet<int>();
+            foreach(int num in nums)
             {
-                if (!numAndCountDict.ContainsKey(nums[i]))
-                    numAndCountDict.Add(nums[i], 1);
-                else
-                    numAndCountDict[nums[i]]++;
+                if(set.Add(num) == false)
+                    set.Remove(num);
             }
-
-            var result = new List<int>();
-
-            foreach (var kvp in numAndCountDict.Where(x => x.Value == 1))
-                result.Add(kvp.Key);
-
-            return result.ToArray();
+            return set.ToArray();
         }
     }
 }
