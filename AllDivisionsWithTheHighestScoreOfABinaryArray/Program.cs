@@ -19,7 +19,8 @@ namespace AllDivisionsWithTheHighestScoreOfABinaryArray
             var map = new Dictionary<int, IList<int>>();
             int leftSum = 0;
             int rightSum = nums.Count(x => x == 1);
-            map.Add(leftSum + rightSum, new List<int>() { 0 });
+            int totalSum = leftSum + rightSum;
+            map.Add(totalSum, new List<int>() { 0 });
             for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] == 0)
@@ -27,11 +28,11 @@ namespace AllDivisionsWithTheHighestScoreOfABinaryArray
                 else
                     rightSum--;
 
-                int sum = leftSum + rightSum;
-                if (!map.ContainsKey(sum))
-                    map.Add(sum, new List<int>() { i + 1 });
+                totalSum = leftSum + rightSum;
+                if (!map.ContainsKey(totalSum))
+                    map.Add(totalSum, new List<int>() { i + 1 });
                 else
-                    map[sum].Add(i + 1);
+                    map[totalSum].Add(i + 1);
             }
             return map
                 .OrderByDescending(x => x.Key)
