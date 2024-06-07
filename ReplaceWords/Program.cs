@@ -10,6 +10,8 @@ namespace ReplaceWords
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(ReplaceWords(new List<string>() { "catt", "cat", "bat", "rat" },
+                "the cattle was rattled by the battery"));
             Console.WriteLine(ReplaceWords(new List<string>() { "cat", "bat", "rat" },
                 "the cattle was rattled by the battery"));
             Console.WriteLine(ReplaceWords(new List<string>() { "a", "b", "c" },
