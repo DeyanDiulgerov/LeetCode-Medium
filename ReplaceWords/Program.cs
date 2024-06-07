@@ -18,55 +18,17 @@ namespace ReplaceWords
 
         public static string ReplaceWords(IList<string> dictionary, string sentence)
         {
-            if (dictionary.Count() > 100 && sentence.Length > 1000)
-                return sentence;
-
-            var chopped = new List<string>();
-            var word = "";
-
-            for (int i = 0; i < sentence.Length; i++)
+            dictionary = dictionary.OrderBy(x => x.Length).ToList();
+            string[] splitted = sentence.Split(' ');
+            StringBuilder sb = new StringBuilder();
+            foreach (string word in splitted)
             {
-                if (sentence[i] == ' ')
-                {
-                    chopped.Add(word);
-                    word = "";
-                    continue;
-                }
-                word += sentence[i];
-
-                if (i == sentence.Length - 1)
-                    chopped.Add(word);
+                if(dictionary.Any(x => word.StartsWith(x)) == true)
+                    sb.Append(dictionary.First(x => word.StartsWith(x)) + " ");
+                else
+                    sb.Append(word + " ");
             }
-
-            for (int i = 0; i < chopped.Count(); i++)
-            {
-                var test = "";
-
-                for (int j = 0; j < chopped[i].Length; j++)
-                {
-                    test += chopped[i][j];
-
-                    if (dictionary.Contains(test))
-                    {
-                        var index = chopped.IndexOf(chopped[i]);
-                        chopped.Remove(chopped[i]);
-                        chopped.Insert(index, test);
-                    }
-                }
-            }
-
-            var result = "";
-            for (int i = 0; i < chopped.Count(); i++)
-            {
-                if (i == chopped.Count() - 1)
-                {
-                    result += chopped[i];
-                    break;
-                }
-                result += chopped[i] + " ";
-            }
-
-            return result;
+            return sb.ToString().TrimEnd();
         }
     }
 }
