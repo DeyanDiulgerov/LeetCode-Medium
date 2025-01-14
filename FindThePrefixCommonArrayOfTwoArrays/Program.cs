@@ -19,32 +19,18 @@ namespace FindThePrefixCommonArrayOfTwoArrays
 
         public static int[] FindThePrefixCommonArrayOfTwoArrays(int[] A, int[] B)
         {
-            int n = A.Length;
-            var aList = new List<int>(A);
-            var bList = new List<int>(B);
-            var result = new List<int>();
-
-            for (int i = 0; i < n; i++)
+            var setA = new HashSet<int>();
+            var setB = new HashSet<int>();
+            int length = A.Length;
+            int[] res = new int[length];
+            int count = 0;
+            for(int i = 0; i < length; i++)
             {
-                int counter = 0;
-                var testAList = new List<int>();
-                var testBList = new List<int>();
-
-                for (int a = i; a >= 0; a--)
-                    testAList.Add(A[a]);
-                for (int b = i; b >= 0; b--)
-                    testBList.Add(B[b]);
-
-                foreach (var item in testAList)
-                {
-                    if (testBList.Contains(item))
-                        counter++;
-                }
-
-                result.Add(counter);
+                setA.Add(A[i]);
+                setB.Add(B[i]);
+                res[i] = setA.Count(x => setB.Contains(x));
             }
-
-            return result.ToArray();
+            return res;
         }
     }
 }
